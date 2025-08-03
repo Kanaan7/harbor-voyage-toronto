@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { CalendarDays, MapPin, Users, Search } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { CalendarDays, Clock, Users, Search, Anchor } from 'lucide-react';
 
 export function Hero() {
   const [searchDate, setSearchDate] = useState('');
-  const [searchLocation, setSearchLocation] = useState('');
+  const [selectedPort, setSelectedPort] = useState('toronto-harbour');
   const [searchCapacity, setSearchCapacity] = useState('');
+  const [duration, setDuration] = useState('');
 
   return (
     <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-ocean-mist to-background">
@@ -21,6 +24,26 @@ export function Hero() {
             Rent premium boats from local charter owners. Experience Toronto Harbour 
             like never before with our trusted community marketplace.
           </p>
+
+          {/* Port Selection Tabs */}
+          <div className="mb-8">
+            <Tabs value={selectedPort} onValueChange={setSelectedPort} className="w-full max-w-md mx-auto">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="toronto-harbour" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Toronto Harbour
+                </TabsTrigger>
+                <TabsTrigger value="port-credit" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Port Credit
+                </TabsTrigger>
+                <TabsTrigger value="hamilton" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Hamilton
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
 
           {/* Search Card */}
           <Card className="max-w-4xl mx-auto shadow-lg">
@@ -41,15 +64,21 @@ export function Hero() {
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium flex items-center">
-                    <MapPin className="h-4 w-4 mr-2" />
-                    Location
+                    <Clock className="h-4 w-4 mr-2" />
+                    Duration
                   </label>
-                  <Input
-                    placeholder="Harbourfront, Islands..."
-                    value={searchLocation}
-                    onChange={(e) => setSearchLocation(e.target.value)}
-                    className="w-full"
-                  />
+                  <Select value={duration} onValueChange={setDuration}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select duration" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2">2 Hours</SelectItem>
+                      <SelectItem value="4">4 Hours</SelectItem>
+                      <SelectItem value="6">6 Hours</SelectItem>
+                      <SelectItem value="8">Full Day (8 Hours)</SelectItem>
+                      <SelectItem value="custom">Custom Duration</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 
                 <div className="space-y-2">
@@ -57,13 +86,18 @@ export function Hero() {
                     <Users className="h-4 w-4 mr-2" />
                     Capacity
                   </label>
-                  <Input
-                    type="number"
-                    placeholder="4"
-                    value={searchCapacity}
-                    onChange={(e) => setSearchCapacity(e.target.value)}
-                    className="w-full"
-                  />
+                  <Select value={searchCapacity} onValueChange={setSearchCapacity}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select capacity" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2-4">2-4 People</SelectItem>
+                      <SelectItem value="5-8">5-8 People</SelectItem>
+                      <SelectItem value="9-12">9-12 People</SelectItem>
+                      <SelectItem value="13-20">13-20 People</SelectItem>
+                      <SelectItem value="20+">20+ People</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 
                 <Button size="lg" className="w-full">
