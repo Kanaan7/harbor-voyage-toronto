@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { Anchor, User, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,25 +12,26 @@ import {
 
 export function Header() {
   const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="border-b bg-card">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Anchor className="h-8 w-8 text-primary" />
           <h1 className="text-2xl font-bold text-primary">Toronto Harbour</h1>
-        </div>
+        </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="/browse" className="text-foreground hover:text-primary transition-colors">
+          <Link to="/browse" className="text-foreground hover:text-primary transition-colors">
             Browse Boats
-          </a>
-          <a href="/how-it-works" className="text-foreground hover:text-primary transition-colors">
+          </Link>
+          <Link to="/how-it-works" className="text-foreground hover:text-primary transition-colors">
             How it Works
-          </a>
-          <a href="/about" className="text-foreground hover:text-primary transition-colors">
+          </Link>
+          <Link to="/about" className="text-foreground hover:text-primary transition-colors">
             About
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center space-x-4">
@@ -44,16 +46,12 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <a href="/profile" className="flex items-center w-full">
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </a>
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <a href="/dashboard" className="flex items-center w-full">
-                    Dashboard
-                  </a>
+                <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                  Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut}>
@@ -64,12 +62,12 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <div className="flex items-center space-x-2">
-              <a href="/auth">
+              <Link to="/auth">
                 <Button variant="ghost">Sign In</Button>
-              </a>
-              <a href="/auth">
+              </Link>
+              <Link to="/auth">
                 <Button>Get Started</Button>
-              </a>
+              </Link>
             </div>
           )}
         </div>
