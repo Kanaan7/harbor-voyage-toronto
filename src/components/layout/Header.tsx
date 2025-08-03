@@ -21,13 +21,13 @@ export function Header() {
         </div>
 
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#" className="text-foreground hover:text-primary transition-colors">
+          <a href="/browse" className="text-foreground hover:text-primary transition-colors">
             Browse Boats
           </a>
-          <a href="#" className="text-foreground hover:text-primary transition-colors">
+          <a href="/how-it-works" className="text-foreground hover:text-primary transition-colors">
             How it Works
           </a>
-          <a href="#" className="text-foreground hover:text-primary transition-colors">
+          <a href="/about" className="text-foreground hover:text-primary transition-colors">
             About
           </a>
         </nav>
@@ -45,11 +45,15 @@ export function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem>
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
+                  <a href="/profile" className="flex items-center w-full">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  Dashboard
+                  <a href="/dashboard" className="flex items-center w-full">
+                    Dashboard
+                  </a>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut}>
@@ -60,8 +64,12 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <div className="flex items-center space-x-2">
-              <Button variant="ghost">Sign In</Button>
-              <Button>Get Started</Button>
+              <a href="/auth">
+                <Button variant="ghost">Sign In</Button>
+              </a>
+              <a href="/auth">
+                <Button>Get Started</Button>
+              </a>
             </div>
           )}
         </div>
