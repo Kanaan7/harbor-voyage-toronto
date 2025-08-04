@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Search, MapPin, Users, Star } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Search, MapPin, Users, Star, Anchor } from 'lucide-react';
 
 const Browse = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPort, setSelectedPort] = useState('toronto-harbour');
 
   // Mock data for demonstration
   const boats = [
@@ -18,6 +20,7 @@ const Browse = () => {
       capacity: 12,
       pricePerHour: 250,
       location: "Toronto Harbour",
+      port: "toronto-harbour",
       rating: 4.8,
       reviews: 24,
       image: "/placeholder.svg",
@@ -25,29 +28,78 @@ const Browse = () => {
     },
     {
       id: 2,
-      title: "Speedboat Adventure",
-      type: "Speedboat",
-      capacity: 6,
-      pricePerHour: 120,
-      location: "Centre Island",
-      rating: 4.6,
+      title: "Island Explorer",
+      type: "Pontoon",
+      capacity: 8,
+      pricePerHour: 150,
+      location: "Toronto Harbour",
+      port: "toronto-harbour",
+      rating: 4.9,
       reviews: 18,
       image: "/placeholder.svg",
-      amenities: ["Water Sports", "Cooler", "Sound System"]
+      amenities: ["WiFi", "Cooler", "Fishing Gear"]
     },
     {
       id: 3,
-      title: "Sailing Catamaran",
-      type: "Sailboat",
-      capacity: 8,
+      title: "Credit Cruiser",
+      type: "Speedboat",
+      capacity: 6,
       pricePerHour: 180,
-      location: "Harbourfront",
-      rating: 4.9,
+      location: "Port Credit",
+      port: "port-credit",
+      rating: 4.7,
       reviews: 31,
       image: "/placeholder.svg",
-      amenities: ["Sailing Experience", "Kitchen", "Deck Space"]
+      amenities: ["Sound System", "Water Sports", "Cooler"]
+    },
+    {
+      id: 4,
+      title: "Hamilton Harbor Queen",
+      type: "Motor Yacht",
+      capacity: 20,
+      pricePerHour: 400,
+      location: "Hamilton",
+      port: "hamilton",
+      rating: 5.0,
+      reviews: 12,
+      image: "/placeholder.svg",
+      amenities: ["Kitchen", "Bar", "WiFi", "Sound System"]
+    },
+    {
+      id: 5,
+      title: "Lake Ontario Explorer",
+      type: "Catamaran",
+      capacity: 15,
+      pricePerHour: 250,
+      location: "Port Credit",
+      port: "port-credit",
+      rating: 4.6,
+      reviews: 27,
+      image: "/placeholder.svg",
+      amenities: ["Sailing", "WiFi", "Kitchen"]
+    },
+    {
+      id: 6,
+      title: "Steel City Sailor",
+      type: "Pontoon",
+      capacity: 10,
+      pricePerHour: 160,
+      location: "Hamilton",
+      port: "hamilton",
+      rating: 4.8,
+      reviews: 22,
+      image: "/placeholder.svg",
+      amenities: ["Kid Friendly", "Cooler", "Sound System"]
     }
   ];
+
+  const filteredBoats = boats.filter(boat => {
+    const matchesSearch = boat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      boat.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      boat.type.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesPort = boat.port === selectedPort;
+    return matchesSearch && matchesPort;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,14 +108,34 @@ const Browse = () => {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">Browse Boats</h1>
           <p className="text-lg text-muted-foreground mb-6">
-            Find the perfect boat for your Toronto Harbour adventure
+            Find the perfect boat for your adventure
           </p>
           
-          <div className="flex gap-4 max-w-2xl">
+          {/* Port Selection Tabs */}
+          <div className="mb-6">
+            <Tabs value={selectedPort} onValueChange={setSelectedPort} className="w-full max-w-md mx-auto">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="toronto-harbour" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Toronto Harbour
+                </TabsTrigger>
+                <TabsTrigger value="port-credit" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Port Credit
+                </TabsTrigger>
+                <TabsTrigger value="hamilton" className="flex items-center gap-2">
+                  <Anchor className="h-4 w-4" />
+                  Hamilton
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          
+          <div className="flex gap-4 max-w-2xl mx-auto">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search by location, boat type, or amenities..."
+                placeholder="Search by boat name or type..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -74,7 +146,7 @@ const Browse = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {boats.map((boat) => (
+          {filteredBoats.map((boat) => (
             <Card key={boat.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-muted">
                 <img 
