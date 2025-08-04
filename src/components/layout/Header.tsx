@@ -23,18 +23,18 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="text-foreground hover:text-primary transition-colors">
-            Home
+          <Link to="/home" className="text-foreground hover:text-primary transition-colors">
+            About
           </Link>
-          <Link to="/browse" className="text-foreground hover:text-primary transition-colors">
+          <Link to="/" className="text-foreground hover:text-primary transition-colors">
             Browse Boats
           </Link>
           <Button 
-            onClick={() => navigate('/browse')}
+            onClick={() => navigate('/list-boat')}
             variant="outline"
             size="sm"
           >
-            Book Now
+            List Your Boat
           </Button>
         </nav>
 
