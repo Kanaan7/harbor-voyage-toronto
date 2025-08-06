@@ -15,24 +15,25 @@ export function Header() {
   const navigate = useNavigate();
 
   return (
-    <header className="border-b bg-card">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
+    <header className="border-b bg-gradient-to-r from-card via-card/95 to-card backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <Link to="/home" className="flex items-center space-x-2">
           <Anchor className="h-8 w-8 text-primary" />
           <h1 className="text-2xl font-bold text-primary">Toronto Harbour</h1>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link to="/home" className="text-foreground hover:text-primary transition-colors">
+        <nav className="flex items-center space-x-2 md:space-x-6 overflow-x-auto">
+          <Link to="/home" className="text-foreground hover:text-primary transition-colors whitespace-nowrap px-2 py-1">
             About
           </Link>
-          <Link to="/" className="text-foreground hover:text-primary transition-colors">
+          <Link to="/" className="text-foreground hover:text-primary transition-colors whitespace-nowrap px-2 py-1">
             Browse Boats
           </Link>
           <Button 
             onClick={() => navigate('/list-boat')}
             variant="outline"
             size="sm"
+            className="whitespace-nowrap"
           >
             List Your Boat
           </Button>
