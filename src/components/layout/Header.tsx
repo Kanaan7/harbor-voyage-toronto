@@ -26,7 +26,7 @@ export function Header() {
           <Link to="/home" className="text-foreground hover:text-primary transition-colors whitespace-nowrap px-2 py-1">
             About
           </Link>
-          <Link to="/" className="text-foreground hover:text-primary transition-colors whitespace-nowrap px-2 py-1">
+          <Link to="/listings" className="text-foreground hover:text-primary transition-colors whitespace-nowrap px-2 py-1">
             Browse Boats
           </Link>
           <Button 
@@ -55,7 +55,7 @@ export function Header() {
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                <DropdownMenuItem onClick={() => navigate('/dashboard/owner')}>
                   Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />

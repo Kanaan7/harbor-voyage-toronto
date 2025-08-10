@@ -13,6 +13,8 @@ function mapListingToBoat(row: any): Boat {
     location: row.pickup_location_name,
     features: (row.amenities ?? []) as string[],
     created_at: row.created_at,
+    lat: row.pickup_latitude ? Number(row.pickup_latitude) : undefined,
+    lng: row.pickup_longitude ? Number(row.pickup_longitude) : undefined,
   }
 }
 

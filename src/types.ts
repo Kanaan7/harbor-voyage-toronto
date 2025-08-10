@@ -16,6 +16,8 @@ export type Boat = {
   location: string;
   features: string[];
   created_at: string;
+  lat?: number;
+  lng?: number;
 };
 
 export type BookingStatus = 'pending' | 'approved' | 'rejected' | 'cancelled';
