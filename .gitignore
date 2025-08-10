@@ -21,4 +21,8 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
+
+# environment variables
+.env
+bun.lockb
 *.sw?
