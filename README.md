@@ -84,3 +84,18 @@ Read more here: [Setting up a custom domain](https://docs.lovable.dev/t
 Copy `.env.example` to `.env` and fill values.
 Run: `npm i` then `npm run dev` (Vite @ http://localhost:5173).
 ips-tricks/custom-domain#step-by-step-guide)
+
+## App structure (MVP)
+- Pages: `/listings`, `/boat/:id`, `/auth`, `/dashboard/owner`
+- Data helpers: `src/lib/supabase/*`
+- Types: `src/types.ts`
+- To wire routes, add react-router routes in your App (or link these pages in your existing nav).
+
+## Supabase setup (run later)
+Run `supabase/sql/schema.sql` then `supabase/sql/rls_policies.sql` in your Supabase SQL editor. Ensure RLS is ON.
+
+## Next
+- Hook up storage uploads (Supabase Storage) in `ImageUploader`
+- Add map (Leaflet/OSM) to BoatDetail
+- Owner create/edit boat forms (uses createBoat/updateBoat)
+
