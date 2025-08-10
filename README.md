@@ -70,4 +70,17 @@ Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/t
+
+## Deploy (Netlify)
+1. Set environment variables in Netlify:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+2. Build command: `npm run build`
+3. Publish directory: `dist`
+4. SPA routing is enabled via `public/_redirects` and `netlify.toml`.
+
+## Local Dev
+Copy `.env.example` to `.env` and fill values.
+Run: `npm i` then `npm run dev` (Vite @ http://localhost:5173).
+ips-tricks/custom-domain#step-by-step-guide)
